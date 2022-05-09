@@ -5,9 +5,12 @@ import { routes } from './routes';
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://nlw-return-two-indol.vercel.app/'
-}))
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://nlw-return-two-indol.vercel.app/");
+  res.header("Access-Control-Allow-Methods", 'POST');
+  app.use(cors());
+  next();
+});
 app.use(express.json());
 app.use(routes)
 
